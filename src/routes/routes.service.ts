@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Routes } from './routes.model';
@@ -15,12 +15,19 @@ export class RoutesService {
   }
 
   async getById(id: number): Promise<Routes> {
-    return this.movieRepository.findOne({ where: { id } });
+    const route = this.movieRepository.findOne({ where: { id } });
+    if(!route) { 
+      throw new NotFoundException();
+    }
+    return route;
   }
 
-  async create(user: Partial<Routes>): Promise<Routes> {
-    const newuser = this.movieRepository.create(user);
-    return this.movieRepository.save(newuser);
+  async create(route: Partial<Routes>): Promise<Routes> {
+    const newRoute = this.movieRepository.create(route);
+    if(!newRoute) {
+      throw new BadRequestException();
+    }
+    return this.movieRepository.save(newRoute);
   }
 
   async update(id: number, user: Partial<Routes>): Promise<Routes> {

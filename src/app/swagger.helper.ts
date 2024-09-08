@@ -17,9 +17,8 @@ export class SwaggerHelper {
 
   build(app: INestApplication) {
     const swaggerConfig = new DocumentBuilder()
-      .addServer('/', 'LOCAL DEV')
-      .addServer('/swag-meet', 'ON STANDS')
       .setTitle('main service')
+      .setDescription('Основной сервер babs maps')
       .setVersion('1.0.0')
       // .addSecurity(apiKey, {
       //   type: 'apiKey',
