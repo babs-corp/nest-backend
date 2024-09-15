@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { RoutesModule } from './routes/routes.module';
+import { CoordinatesModule } from './coordinates/coordinates.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { RoutesModule } from './routes/routes.module';
       envFilePath: '.env',
     }),
     DatabaseModule,
-    RoutesModule
+    RoutesModule,
+    CoordinatesModule
   ],
 
   controllers: [AppController],

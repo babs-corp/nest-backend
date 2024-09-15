@@ -7,15 +7,15 @@ import { Routes } from './routes.model';
 export class RoutesService {
   constructor(
     @InjectRepository(Routes)
-    private movieRepository: Repository<Routes>
+    private routeRepository: Repository<Routes>
   ) {}
 
   async findAll(): Promise<Routes[]> {
-    return this.movieRepository.find();
+    return this.routeRepository.find();
   }
 
   async getById(id: number): Promise<Routes> {
-    const route = this.movieRepository.findOne({ where: { id } });
+    const route = this.routeRepository.findOne({ where: { id } });
     if(!route) { 
       throw new NotFoundException();
     }
@@ -23,19 +23,19 @@ export class RoutesService {
   }
 
   async create(route: Partial<Routes>): Promise<Routes> {
-    const newRoute = this.movieRepository.create(route);
+    const newRoute = this.routeRepository.create(route);
     if(!newRoute) {
       throw new BadRequestException();
     }
-    return this.movieRepository.save(newRoute);
+    return this.routeRepository.save(newRoute);
   }
 
   async update(id: number, user: Partial<Routes>): Promise<Routes> {
-    await this.movieRepository.update(id, user);
-    return this.movieRepository.findOne({ where: { id } });
+    await this.routeRepository.update(id, user);
+    return this.routeRepository.findOne({ where: { id } });
   }
 
   async delete(id: number): Promise<void> {
-    await this.movieRepository.delete(id);
+    await this.routeRepository.delete(id);
   }
 }

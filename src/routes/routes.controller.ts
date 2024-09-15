@@ -17,12 +17,12 @@ import { OutRouteDto } from './dto/out-route.dto';
 
 @Controller('routes')
 export class RoutesController {
-  constructor(private readonly moviesService: RoutesService) {}
+  constructor(private readonly routesService: RoutesService) {}
 
   @ApiOperation({ summary: 'Получение всех маршрутов' })
   @Get()
   async findAll(): Promise<Routes[]> {
-    return this.moviesService.findAll();
+    return this.routesService.findAll();
   }
 
   @ApiOperation({ summary: 'Создание маршрута' })
@@ -33,7 +33,7 @@ export class RoutesController {
   async create(
     @Body() route: CreateRouteDto
   ): Promise<Routes> {
-    const createdRoute = await this.moviesService.create(route);
+    const createdRoute = await this.routesService.create(route);
     return createdRoute;
   }
 
@@ -43,20 +43,20 @@ export class RoutesController {
   @Get(':id')
   @HttpCode(200)
   async getById(@Param('id') id: number): Promise<OutRouteDto> {
-    const route = await this.moviesService.getById(id);
+    const route = await this.routesService.getById(id);
     return route;
   }
 
   @ApiOperation({ summary: 'Удаление маршрута по id' })
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<any> {
-    const route = await this.moviesService.getById(id);
+    const route = await this.routesService.getById(id);
 
     if (!route) {
       throw new NotFoundException('Route does not exist!');
     }
 
-    await this.moviesService.delete(id);
+    await this.routesService.delete(id);
     return { message: 'Route deleted successfully' };
   }
 }

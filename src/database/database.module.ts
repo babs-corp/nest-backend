@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Routes } from 'src/routes/routes.model';
+import { Coordinates } from 'src/coordinates/coordinates.model';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -14,7 +15,7 @@ dotenv.config();
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASS,
       database: 'postgres',
-      entities: [Routes],
+      entities: [Routes, Coordinates],
       synchronize: true,
     }),
   ],
