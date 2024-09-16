@@ -10,12 +10,13 @@ import {
 } from '@nestjs/common';
 import { CoordinatesService } from './coordinates.service';
 import { Coordinates } from './coordinates.model';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ROUTE_ERROR_SCHEMA, ROUTE_NOT_FOUND_ERROR_SCHEMA } from './swag/schemas';
 import { CreateCoordinateDto } from './dto/create-coordinate.dto';
 import { OutCoordinateDto } from './dto/out-coordinate.dto';
 
 @Controller('coordinates')
+@ApiTags('Coordinates')
 export class CoordinatesController {
   constructor(private readonly coordinatesService: CoordinatesService) {}
 
