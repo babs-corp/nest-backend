@@ -8,5 +8,6 @@ import { Routes } from './routes.model';
   imports: [TypeOrmModule.forFeature([Routes])],
   controllers: [RoutesController],
   providers: [RoutesService],
+  exports: [RoutesService],
 })
 export class RoutesModule {}

@@ -18,7 +18,9 @@ import { OutCoordinateDto } from './dto/out-coordinate.dto';
 @Controller('coordinates')
 @ApiTags('Coordinates')
 export class CoordinatesController {
-  constructor(private readonly coordinatesService: CoordinatesService) {}
+  constructor(
+    private readonly coordinatesService: CoordinatesService
+  ) {}
 
   @ApiOperation({ summary: 'Получение всех точек' })
   @Get()
@@ -32,9 +34,10 @@ export class CoordinatesController {
   @Post()
   @HttpCode(201)
   async create(
-    @Body() route: CreateCoordinateDto
+    @Body() coordinate: CreateCoordinateDto
   ): Promise<Coordinates> {
-    const createdRoute = await this.coordinatesService.create(route);
+    const createdRoute = await this.coordinatesService.create(coordinate);
+
     return createdRoute;
   }
 
@@ -44,21 +47,21 @@ export class CoordinatesController {
   @Get(':id')
   @HttpCode(200)
   async getById(@Param('id') id: number): Promise<OutCoordinateDto> {
-    const route = await this.coordinatesService.getById(id);
-    return route;
+    const coordinates = await this.coordinatesService.getById(id);
+    return coordinates;
   }
 
   @ApiOperation({ summary: 'Удаление точки по id' })
   @Delete(':id')
   async delete(@Param('id') id: number): Promise<any> {
-    const route = await this.coordinatesService.getById(id);
+    const coordinate = await this.coordinatesService.getById(id);
 
-    if (!route) {
-      throw new NotFoundException('Route does not exist!');
+    if (!coordinate) {
+      throw new NotFoundException('Coordinate does not exist!');
     }
 
     await this.coordinatesService.delete(id);
-    return { message: 'Route deleted successfully' };
+    return { message: 'Coordinate deleted successfully' };
   }
 }
   

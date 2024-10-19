@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Expose } from "class-transformer";
-import { IsDate, IsDecimal, IsNumber } from "class-validator";
+import { IsDate, IsDecimal, IsNumber, IsOptional } from "class-validator";
 
 @Exclude()
 export class CoordinateDto {
@@ -19,7 +19,7 @@ export class CoordinateDto {
   })
   @IsNumber()
   @Expose()
-  route_id: number;
+  routeId: number;
 
   @ApiProperty({
     title: 'Широта точки',
@@ -46,6 +46,7 @@ export class CoordinateDto {
     example: 1
   })
   @IsNumber()
+  @IsOptional()
   order: number;
 
   @ApiProperty({

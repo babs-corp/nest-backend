@@ -30,8 +30,8 @@ export class RoutesService {
     return this.routeRepository.save(newRoute);
   }
 
-  async update(id: number, user: Partial<Routes>): Promise<Routes> {
-    await this.routeRepository.update(id, user);
+  async update(id: number, route: Partial<Routes>): Promise<Routes> {
+    await this.routeRepository.update(id, route);
     return this.routeRepository.findOne({ where: { id } });
   }
 

@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Coordinates } from 'src/coordinates/coordinates.model';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity({ name: 'Routes' })
 export class Routes {
@@ -19,6 +20,9 @@ export class Routes {
 
   @Column({ nullable: true })
   publicity: string;
+
+  @OneToMany(() => Coordinates, (coordinates) => coordinates.route, { eager: true })
+  coordinates: Coordinates[]
 
   @Column({ default: new Date() })
   created_at: Date;

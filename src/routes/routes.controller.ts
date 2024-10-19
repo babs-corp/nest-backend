@@ -22,7 +22,7 @@ export class RoutesController {
 
   @ApiOperation({ summary: 'Получение всех маршрутов' })
   @Get()
-  async findAll(): Promise<Routes[]> {
+  async findAll(): Promise<OutRouteDto[]> {
     return this.routesService.findAll();
   }
 

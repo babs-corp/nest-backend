@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Exclude, Expose } from "class-transformer";
 import { IsDate, IsNumber, IsString } from "class-validator";
+import { CoordinateDto } from "src/coordinates/dto/coordinate.dto";
 
 @Exclude()
 export class RouteDto {
@@ -54,6 +55,8 @@ export class RouteDto {
   })
   @IsString()
   publicity: string;
+
+  coordinates: CoordinateDto[]
 
   @ApiProperty({
     title: 'Дата создания маршрута'

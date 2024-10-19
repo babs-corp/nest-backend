@@ -1,14 +1,17 @@
 import { Routes } from 'src/routes/routes.model';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from 'typeorm';
 
 @Entity({ name: 'Coordinates' })
+@Unique(["routeId", "order"])
 export class Coordinates {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ManyToOne(() => Routes, route => route.coordinates)
+  route: Routes;
+
   @Column()
-  @ManyToOne(() => Routes)
-  route_id: number;
+  routeId: number;
 
   @Column({ 
     type: 'decimal', 
@@ -24,7 +27,9 @@ export class Coordinates {
   })
   longitude: number;
 
-  @Column()
+  @Column({
+    nullable: false,
+  })
   order: number;
 
   @Column({ default: new Date() })
