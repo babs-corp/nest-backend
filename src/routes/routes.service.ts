@@ -22,6 +22,14 @@ export class RoutesService {
     return route;
   }
 
+  async getByUserId(userId: string): Promise<Routes[]> {
+    const routes = this.routeRepository.find({ where: { user_id: userId } });
+    if(!routes) { 
+      throw new NotFoundException();
+    }
+    return routes;
+  }
+
   async create(route: Partial<Routes>): Promise<Routes> {
     const newRoute = this.routeRepository.create(route);
     if(!newRoute) {

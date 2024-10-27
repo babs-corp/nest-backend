@@ -7,6 +7,7 @@ import {
   Delete,
   NotFoundException,
   HttpCode,
+  Headers,
 } from '@nestjs/common';
 import { RoutesService } from './routes.service';
 import { Routes } from './routes.model';
@@ -24,6 +25,17 @@ export class RoutesController {
   @Get()
   async findAll(): Promise<OutRouteDto[]> {
     return this.routesService.findAll();
+  }
+
+  @ApiOperation({ summary: 'Получение всех маршрутов пользователя' })
+  @ApiOkResponse({ type: OutRouteDto })
+  @ApiNotFoundResponse({ description: 'Маршрут не найден', schema: ROUTE_NOT_FOUND_ERROR_SCHEMA })
+  @Get('/user_routes')
+  @HttpCode(200)
+  
+  async getByUserId(@Param('user_id') user_id: string): Promise<OutRouteDto[]> {
+    const routes = await this.routesService.getByUserId(user_id);
+    return routes;
   }
 
   @ApiOperation({ summary: 'Создание маршрута' })
